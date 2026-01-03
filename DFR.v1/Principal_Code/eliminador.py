@@ -4,7 +4,7 @@ from datetime import datetime
 fecha_hoy = datetime.now().strftime("%d/%m/%Y")   
 fecha_del_documento= fecha_hoy.replace("/", "-")   
 BASE_DIR = Path(__file__).resolve().parent.parent
-CARPETA_TRABAJO = BASE_DIR   # Uadmin
+CARPETA_TRABAJO = BASE_DIR   
 
 def eliminar_archivo_por_palabra(palabra_buscar: str):
     """
@@ -37,4 +37,5 @@ def eliminar_archivo_por_palabra(palabra_buscar: str):
         print(f"✔ Archivo eliminado: {archivo_a_borrar.name}")
     except Exception as e:
         print(f"❌ Error al eliminar el archivo: {e}")
+
 
