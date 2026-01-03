@@ -6,7 +6,7 @@ from openpyxl import load_workbook
 BASE_DIR = Path(__file__).resolve().parent.parent
 CARPETA_TRABAJO_1 = BASE_DIR                     
 CARPETA_TRABAJO_2 = BASE_DIR / "Registro_Anual" 
-DOCUMENTO_TRABAJO_1 = BASE_DIR / "Monitoreo Diario U-Admin Grecia-Desamparados.xlsx"
+DOCUMENTO_TRABAJO_1 = BASE_DIR / "Nombre del documento xlsx"
 
 def copiar_archivo_con_fecha_anual(palabra_buscar: str):
 
@@ -68,3 +68,4 @@ def actualizacion_anual():
 
 
 actualizacion_anual()
+
