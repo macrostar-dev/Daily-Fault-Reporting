@@ -15,7 +15,7 @@ def enviar_mensaje():
     }
 
     mensaje = (
-        "El correo del reportede Uadmin se a enviado exitosamente.👓\n"
+        "Mensaje de notificacion\n"
         f"⏱️ Hora de envio: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
     )
 
@@ -31,4 +31,5 @@ def enviar_mensaje():
     else:
         print("❌ Error al enviar mensaje:")
         print(resp.status_code, resp.text)
+
 
