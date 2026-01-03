@@ -3,7 +3,6 @@ from pathlib import Path
 from datetime import datetime
 from openpyxl import load_workbook
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 CARPETA_TRABAJO_1 = BASE_DIR                     
 CARPETA_TRABAJO_2 = BASE_DIR / "Registro_Anual" 
@@ -50,10 +49,6 @@ def copiar_archivo_con_fecha_anual(palabra_buscar: str):
 
     return ruta_copia
 
-# Ejecución
-# print(copiar_archivo_con_fecha(palabra_buscar="Diario"))
-from openpyxl import load_workbook
-
 def limpiar_excel_sin_encabezados(ruta_excel):
     wb = load_workbook(ruta_excel)
 
@@ -63,9 +58,6 @@ def limpiar_excel_sin_encabezados(ruta_excel):
 
     wb.save(ruta_excel)
 
-
-#limpiar_excel_sin_encabezados(DOCUMENTO_TRABAJO_1)
-
 def actualizacion_anual():
     if datetime.now().strftime("%d/%m") == "1/1":
         copiar_archivo_con_fecha_anual(palabra_buscar="Diario")
@@ -73,5 +65,6 @@ def actualizacion_anual():
         print("Reporte reseteado")
     else:
         print()
+
 
 actualizacion_anual()
