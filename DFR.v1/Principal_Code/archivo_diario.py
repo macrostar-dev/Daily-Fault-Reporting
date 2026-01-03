@@ -2,9 +2,9 @@ import shutil
 from pathlib import Path
 from datetime import datetime
 
-# Carpeta base = padre de Principal_Code → Uadmin
+
 BASE_DIR = Path(__file__).resolve().parent.parent
-CARPETA_TRABAJO = BASE_DIR   # Trabajamos directo en Uadmin
+CARPETA_TRABAJO = BASE_DIR   
 
 def copiar_archivo_con_fecha(palabra_buscar: str):
     """
@@ -20,7 +20,7 @@ def copiar_archivo_con_fecha(palabra_buscar: str):
     if not CARPETA_TRABAJO.exists():
         raise FileNotFoundError(f"❌ La carpeta base no existe: {CARPETA_TRABAJO}")
 
-    # 1. Buscar archivo que contenga la palabra clave en Uadmin
+    # 1. Buscar archivo que contenga la palabra clave 
     archivo_encontrado = next(
         (
             f for f in CARPETA_TRABAJO.iterdir()
@@ -43,14 +43,13 @@ def copiar_archivo_con_fecha(palabra_buscar: str):
     nuevo_nombre = f"{archivo_encontrado.stem} {fecha_para_nombre}{archivo_encontrado.suffix}"
     ruta_copia = CARPETA_TRABAJO / nuevo_nombre
 
-    # 4. Crear copia en la MISMA carpeta (Uadmin)
+    # 4. Crear copia en la MISMA carpeta 
     shutil.copy2(archivo_encontrado, ruta_copia)
     print(f"📑 Copia creada como: {ruta_copia.name}")
     print(f"🗓 Fecha usada (lógica): {fecha_hoy}")
 
     return ruta_copia
 
-# ==========================
-# EJECUCIÓN DIRECTA (ejemplo)
-# ==========================
+
+
 
