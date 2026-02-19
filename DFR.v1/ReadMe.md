@@ -1,38 +1,68 @@
-Sistema de Automatización de Reportes
-Este proyecto es una solución integral en Python diseñada para automatizar el ciclo de vida de los reportes operativos: desde la extracción de datos mediante navegación web hasta el procesamiento de hojas de cálculo y la notificación de resultados.
+# ⚙️ Report Automation System (V1)
 
-🚀 Flujo de Trabajo (Script: hard.py)
-Mantenimiento Temporal: Al iniciar, el sistema verifica si es necesario realizar un respaldo anual y resetear las plantillas de trabajo.
-Extracción Web: Utiliza automatización de navegador para acceder a portales internos, navegar a secciones específicas y descargar los datos más recientes.
-Preparación de Archivos: Localiza los archivos descargados, los mueve al directorio de trabajo y asegura que tengan el formato .xlsx correcto.
-Procesamiento de Datos: Analiza los archivos origen, filtra filas bajo criterios específicos (ej. registros con estado "KO") y consolida la información en un documento maestro.
-Distribución y Notificación: Genera una copia fechada del reporte final, la envía por correo electrónico a los destinatarios configurados y emite una alerta de éxito vía mensajería instantánea.
-Limpieza: Elimina los archivos temporales creados durante la ejecución para optimizar el espacio.
+<p align="center">
+  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge" alt="Version 1.0">
+  <img src="https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Status-Legacy-yellow?style=for-the-badge" alt="Status">
+</p>
 
-📂 Descripción de los Módulos
-1. Automatización de Navegador (login.py)
-Gestiona el inicio de sesión automático y la interacción con elementos de la interfaz web.
-Ejecuta scripts de consola (JavaScript) para forzar descargas o acciones específicas en el portal.
-Utiliza un modo "sin cabeza" (headless) para ejecutarse en servidores sin interfaz gráfica.
+---
 
-2. Procesamiento de Excel (filler.py, conversor.py)
-Transformación: Convierte archivos genéricos descargados en libros de Excel válidos.
-Lógica de Inserción: Busca celdas vacías en documentos de destino para insertar nuevos datos sin sobrescribir información previa.
-Filtrado: Identifica y extrae exclusivamente las filas que requieren atención técnica.
+## 📄 Overview
 
-3. Gestión de Archivos (reubicador.py, archivo_diario.py, eliminador.py)
-Organización: Monitorea la carpeta de descargas del usuario y mueve los reportes detectados al entorno de trabajo.
-Versionado: Crea copias de seguridad diarias incluyendo la fecha en el nombre del archivo para mantener un historial.
-Mantenimiento: Incluye funciones para borrar archivos específicos basados en palabras clave o patrones de nombre.
+This is the foundational version of the **Automated Reporting System**. It was designed to solve the manual overhead of daily data collection and processing. The system focuses on web scraping, local file management, and basic data consolidation into Excel.
 
-4. Comunicaciones (correo.py, notification.py)
-Envío de Mail: Soporta el envío de correos con archivos adjuntos y copia (CC) a múltiples usuarios vía SMTP.
-Alertas API: Se integra con servicios de mensajería (Webex) mediante peticiones HTTP para confirmar la finalización del proceso en tiempo real.
+---
 
-6. Control Anual (actualizador_anual.py)
-Ejecuta una rutina especial cada 1 de enero para archivar el registro del año saliente y limpiar las filas de los documentos de trabajo activos, preparándolos para el nuevo ciclo.
+## 🚀 Core Workflow (`hard.py`)
 
-🛠️ Requisitos del Sistema
-Python 3.x
+The original system follows a linear execution path to handle daily tasks:
+
+1.  **🔍 Pre-check:** Checks for annual maintenance requirements using `actualizador_anual.py`.
+2.  **🌐 Web Extraction:** Uses Selenium to log into portals and trigger report downloads.
+3.  **📂 File Relocation:** Monitors the system's download folder and moves relevant files to the working directory.
+4.  **📊 Data Processing:** * Converts raw files to `.xlsx`.
+    * Filters specific rows and updates the master spreadsheet.
+5.  **📧 Communication:** Sends the finalized report via SMTP and notifies status through Webex.
+6.  **🧹 Clean-up:** Removes temporary files to keep the workspace tidy.
+
+---
+
+## 🧩 Module Breakdown
+
+### 🌐 Automation & Scraping
+* **`login.py`:** Handles automated authentication and UI interaction.
+* **`reubicador.py`:** Logic for detecting and moving downloaded files based on naming patterns.
+
+### 📉 Data Handling
+* **`filler.py` & `conversor.py`:** The engine behind Excel manipulation. It identifies empty rows for data insertion and ensures correct file formats using `openpyxl`.
+
+### 📂 File & System Management
+* **`archivo_diario.py` & `eliminador.py`:** Manages the historical archive by creating dated copies and deleting obsolete logs.
+* **`actualizador_anual.py`:** A specialized script to reset templates and archive data every January 1st.
+
+### 🔔 Notifications
+* **`correo.py` & `notification.py`:** Standard modules for email distribution and instant messaging alerts.
+
+---
+
+## 🛠️ System Requirements
+
+| Requirement | Detail |
+| :--- | :--- |
+| **Language** | Python 3.x |
+| **Libraries** | `selenium`, `openpyxl`, `requests`, `shutil` |
+| **Driver** | ChromeDriver (must match local Chrome version) |
+
+---
+
+## ⚙️ Setup Note
+In this version, credentials and configurations are managed directly within the scripts. For a more secure approach using environment variables, please refer to **Version 2**.
+
+---
+
+<p align="center">
+  <b>Developed as a robust foundation for operational automation.</b>
+</p>
 Librerías: selenium, openpyxl, requests, shutil.
 Navegador: Google Chrome y su respectivo WebDriver.
